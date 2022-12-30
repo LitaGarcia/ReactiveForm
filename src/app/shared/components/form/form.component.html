@@ -1,0 +1,51 @@
+<h5>Username</h5>
+<span class="p-float-label">
+  <input id="float-input" type="text" pInputText />
+  <label for="float-input">LitaGarcia</label>
+</span>
+
+<h5>Password</h5>
+<span class="p-input-icon-right">
+  <i class="pi pi-key"></i>
+  <input type="text" pInputText />
+</span>
+
+<h5>Confirm your password</h5>
+<div class="field">
+  <span class="p-input-icon-right"
+    ><i class="pi pi-key"></i>
+
+    <input
+      id="confirmPassword"
+      type="confirmPassword"
+      class="ng-invalid ng-dirty"
+      pInputText
+    />
+  </span>
+  <br />
+  <small id="username2-help" class="p-error block"
+    >Password is not the same.</small
+  >
+</div>
+
+<h5>Mail</h5>
+<span class="p-float-label">
+  <input id="float-input" type="text" pInputText />
+  <label for="float-input">litagarcia@mail.com</label>
+</span>
+
+<br />
+
+<p-checkbox
+  name="offers"
+  value="offers"
+  label="Send me promotional offers"
+></p-checkbox>
+
+<h5>Advanced with Templating, Filtering and Clear Icon</h5>
+<p-dropdown
+  [options]="countries"
+  [(ngModel)]="selectedCountry"
+  optionLabel="name"
+>
+</p-dropdown>
