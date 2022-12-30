@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
+import json from '../../../countries/countries.json';
 
-class Country {
+interface Country {
   name: string;
-
-  constructor(name: string) {
-    this.name = name;
-  }
+  code: string;
 }
 
 @Component({
@@ -18,17 +16,7 @@ export class FormComponent {
   selectedCountry?: Country;
 
   constructor() {
-    this.countries = [
-      new Country('Australia'),
-      new Country('Brazil'),
-      new Country('China'),
-      new Country('Egypt'),
-      new Country('France'),
-      new Country('Germany'),
-      new Country('India'),
-      new Country('Japan'),
-      new Country('Spain'),
-      new Country('United States'),
-    ];
+    this.countries = json;
   }
+  
 }
