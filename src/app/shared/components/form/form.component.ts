@@ -21,7 +21,7 @@ export class FormComponent {
     this.countries = json;
   }
 
-  handleClick() {
+  createNewUser() {
     this.user = new User(
       this.newUserForm.controls['username'].value,
       this.newUserForm.controls['mail'].value,
@@ -31,6 +31,7 @@ export class FormComponent {
     );
     this.usersList.push(this.user);
     console.log(this.usersList);
+    // localStorage.setItem('user', this.user.username);
     this.user = new User('', '', this.selectedCountry, false, '');
   }
 

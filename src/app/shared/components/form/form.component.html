@@ -1,7 +1,7 @@
-<h5>Username</h5>
+<div class="flex gap-8 centerText">
+  <form (ngSubmit)="saveNewUser()" #newUserForm="ngForm">
+    <h5>Username</h5>
 
-<form (ngSubmit)="saveNewUser()" #newUserForm="ngForm">
-  <div class="wrapper">
     <span class="p-float-label">
       <input
         id="float-input"
@@ -9,86 +9,86 @@
         pInputText
         [(ngModel)]="user.username"
         name="username"
+        required
       />
       <label for="float-input">LitaGarcia</label>
     </span>
-  </div>
 
-  <h5>Password</h5>
-  <span class="p-input-icon-right">
-    <i class="pi pi-key"></i>
-    <input type="text" pInputText />
-  </span>
-
-  <h5>Confirm your password</h5>
-  <div class="field">
-    <span class="p-input-icon-right"
-      ><i class="pi pi-key"></i>
-
-      <input
-        id="confirmPassword"
-        type="confirmPassword"
-        class="ng-invalid ng-dirty"
-        pInputText
-      />
+    <h5>Password</h5>
+    <span class="p-input-icon-right">
+      <i class="pi pi-key"></i>
+      <input type="text" pInputText />
     </span>
 
-    <small id="username2-help" class="p-error block"
-      >Password is not the same.</small
+    <h5>Confirm your password</h5>
+    <div class="field">
+      <span class="p-input-icon-right"
+        ><i class="pi pi-key"></i>
+
+        <input
+          id="confirmPassword"
+          type="confirmPassword"
+          class="ng-invalid ng-dirty"
+          pInputText
+        />
+      </span>
+
+      <small id="username2-help" class="p-error block"
+        >Password is not the same.</small
+      >
+    </div>
+
+    <h5>Mail</h5>
+    <span class="p-float-label">
+      <input
+        pInputText
+        id="float-input"
+        type="text"
+        name="mail"
+        [(ngModel)]="user.mail"
+        required
+      />
+      <label for="float-input">litagarcia@mail.com</label>
+    </span>
+
+    <br />
+
+    <p-checkbox
+      name="subscription"
+      [binary]="true"
+      [(ngModel)]="user.subscription"
+      label="Send me promotional offers"
+    ></p-checkbox>
+
+    <h5>Country</h5>
+    <p-dropdown
+      [options]="countries"
+      [(ngModel)]="selectedCountry"
+      optionLabel="name"
+      name="selectedCountry"
     >
-  </div>
+    </p-dropdown>
 
-  <h5>Mail</h5>
-  <span class="p-float-label">
-    <input
-      pInputText
-      id="float-input"
-      type="text"
-      name="mail"
-      [(ngModel)]="user.mail"
-    />
-    <label for="float-input">litagarcia@mail.com</label>
-  </span>
+    <h5>City</h5>
+    <span class="p-float-label">
+      <input
+        id="float-input"
+        type="text"
+        pInputText
+        [(ngModel)]="user.city"
+        name="city"
+        required
+      />
+      <label for="float-input">Madrid</label>
+    </span>
 
-  <br />
+    <button
+      pButton
+      type="button"
+      label="Send"
+      (click)="createNewUser()"
+    ></button>
+  </form>
 
-  <p-checkbox
-    name="subscription"
-    value="subscription"
-    [(ngModel)]="user.subscription"
-    label="Send me promotional offers"
-  ></p-checkbox>
-
-  <h5>Country</h5>
-  <p-dropdown
-    [options]="countries"
-    [(ngModel)]="selectedCountry"
-    optionLabel="name"
-    name="selectedCountry"
-  >
-  </p-dropdown>
-
-  <h5>City</h5>
-  <span class="p-float-label">
-    <input
-      id="float-input"
-      type="text"
-      pInputText
-      [(ngModel)]="user.city"
-      name="city"
-    />
-    <label for="float-input">Madrid</label>
-  </span>
-
-  <button pButton type="button" label="Send" (click)="handleClick()"></button>
-</form>
-
-<h2>Testing</h2>
-<ul>
-  <li *ngFor="let user of usersList">
-    {{ user.username }}
-    {{ user.city }}
-    {{ user.mail }}
-    {{ user.country.name }}
-  </li>
-</ul>
+  <app-table [usersList]="usersList"></app-table>
+</div>

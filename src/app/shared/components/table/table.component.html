@@ -1,0 +1,44 @@
+<p-table [value]="usersList" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Mail</th>
+      <th>Subscribed</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td>{{ user.username }}</td>
+      <td>{{ user.mail }}</td>
+      <td>
+        <i
+          class="pi pi-check"
+          style="font-size: 1rem"
+          *ngIf="user.subscription"
+          (click)="prueba()"
+        ></i>
+      </td>
+      <td>{{ user.country.name }}</td>
+      <td>{{ user.city }}</td>
+      <td>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-user-edit"
+          class="p-button-rounded p-button-info p-button-outlined"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-trash"
+          class="p-button-rounded p-button-danger p-button-outlined"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
