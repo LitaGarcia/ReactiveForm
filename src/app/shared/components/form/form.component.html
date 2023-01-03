@@ -1,5 +1,5 @@
 <div class="flex gap-8 centerText">
-  <form [formGroup]="newUserForm">
+  <form (ngSubmit)="createNewUser()" [formGroup]="newUserForm">
     <h5>Username</h5>
 
     <span class="p-float-label">
@@ -11,8 +11,14 @@
       />
       <label for="float-input">LitaGarcia</label>
     </span>
+    <small
+      id="username2-help"
+      class="p-error block"
+      *ngIf="validateField('username')"
+      >The username should have min. 3 characters.</small
+    >
 
-    <h5>Password</h5>
+    <!-- <h5>Password</h5>
     <span class="p-input-icon-right">
       <i class="pi pi-key"></i>
       <input type="text" pInputText />
@@ -34,13 +40,19 @@
       <small id="username2-help" class="p-error block"
         >Password is not the same.</small
       >
-    </div>
+    </div> -->
 
-    <h5>Mail</h5>
+    <h5>Email</h5>
     <span class="p-float-label">
-      <input pInputText id="float-input" type="text" />
+      <input pInputText id="float-input" type="text" formControlName="mail" />
       <label for="float-input">litagarcia@mail.com</label>
     </span>
+    <small
+      id="username2-help"
+      class="p-error block"
+      *ngIf="validateField('mail')"
+      >You need to write an email.</small
+    >
 
     <br />
 
@@ -48,6 +60,7 @@
       name="subscription"
       [binary]="true"
       label="Send me promotional offers"
+      formControlName="subscription"
     ></p-checkbox>
 
     <h5>Country</h5>
@@ -55,7 +68,7 @@
 
     <h5>City</h5>
     <span class="p-float-label">
-      <input id="float-input" type="text" pInputText />
+      <input id="float-input" type="text" pInputText formControlName="city" />
       <label for="float-input">Madrid</label>
     </span>
 

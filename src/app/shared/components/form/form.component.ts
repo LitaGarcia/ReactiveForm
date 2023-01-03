@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import json from '../../../countries/countries.json';
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import User from '../../../classes/user';
 import Country from '../../../interfaces/country';
 
@@ -10,16 +10,32 @@ import Country from '../../../interfaces/country';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent {
-  newUserForm: FormGroup = new FormGroup({
-    username: new FormControl(''),
+  newUserForm: FormGroup = this.fb.group({
+    username: [, [Validators.required, Validators.minLength(3)]],
+    mail: [, [Validators.required, Validators.email]],
+    subscription: [true],
+    country: [],
+    city: [],
   });
 
   countries!: Country[];
   selectedCountry!: Country;
 
-  constructor() {
+  constructor(private fb: FormBuilder) {
     this.countries = json;
   }
 
-  createNewUser() {}
+  createNewUser() {
+    if (this.newUserForm.invalid) {
+      return;
+    }
+    console.log(this.newUserForm.value);
+  }
+
+  validateField(field: string) {
+    return (
+      this.newUserForm.controls[field].errors &&
+      this.newUserForm.controls[field].touched
+    );
+  }
 }
