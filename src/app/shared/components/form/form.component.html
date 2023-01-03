@@ -1,5 +1,5 @@
 <div class="flex gap-8 centerText">
-  <form (ngSubmit)="saveNewUser()" #newUserForm="ngForm">
+  <form [formGroup]="newUserForm">
     <h5>Username</h5>
 
     <span class="p-float-label">
@@ -7,9 +7,7 @@
         id="float-input"
         type="text"
         pInputText
-        [(ngModel)]="user.username"
-        name="username"
-        required
+        formControlName="username"
       />
       <label for="float-input">LitaGarcia</label>
     </span>
@@ -40,14 +38,7 @@
 
     <h5>Mail</h5>
     <span class="p-float-label">
-      <input
-        pInputText
-        id="float-input"
-        type="text"
-        name="mail"
-        [(ngModel)]="user.mail"
-        required
-      />
+      <input pInputText id="float-input" type="text" />
       <label for="float-input">litagarcia@mail.com</label>
     </span>
 
@@ -56,29 +47,15 @@
     <p-checkbox
       name="subscription"
       [binary]="true"
-      [(ngModel)]="user.subscription"
       label="Send me promotional offers"
     ></p-checkbox>
 
     <h5>Country</h5>
-    <p-dropdown
-      [options]="countries"
-      [(ngModel)]="selectedCountry"
-      optionLabel="name"
-      name="selectedCountry"
-    >
-    </p-dropdown>
+    <p-dropdown [options]="countries" optionLabel="name"> </p-dropdown>
 
     <h5>City</h5>
     <span class="p-float-label">
-      <input
-        id="float-input"
-        type="text"
-        pInputText
-        [(ngModel)]="user.city"
-        name="city"
-        required
-      />
+      <input id="float-input" type="text" pInputText />
       <label for="float-input">Madrid</label>
     </span>
 
@@ -90,5 +67,5 @@
     ></button>
   </form>
 
-  <app-table [usersList]="usersList"></app-table>
+  <app-table></app-table>
 </div>

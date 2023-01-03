@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import json from '../../../countries/countries.json';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import User from '../../../classes/user';
 import Country from '../../../interfaces/country';
 
@@ -10,30 +10,16 @@ import Country from '../../../interfaces/country';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent {
-  @ViewChild('newUserForm') newUserForm!: NgForm;
+  newUserForm: FormGroup = new FormGroup({
+    username: new FormControl(''),
+  });
 
   countries!: Country[];
   selectedCountry!: Country;
-  usersList: User[] = [];
-  user = new User('', '', this.selectedCountry, false, '');
 
   constructor() {
     this.countries = json;
   }
 
-  createNewUser() {
-    this.user = new User(
-      this.newUserForm.controls['username'].value,
-      this.newUserForm.controls['mail'].value,
-      this.newUserForm.controls['selectedCountry'].value,
-      this.newUserForm.controls['subscription'].value,
-      this.newUserForm.controls['city'].value
-    );
-    this.usersList.push(this.user);
-    console.log(this.usersList);
-    // localStorage.setItem('user', this.user.username);
-    this.user = new User('', '', this.selectedCountry, false, '');
-  }
-
-  saveNewUser() {}
+  createNewUser() {}
 }
