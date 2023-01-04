@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import User from '../../../classes/user';
-import { HttpClient } from '@angular/common/http';
+import { UsersService } from '../../users.service';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-table',
@@ -9,8 +10,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent {
-  constructor(private http: HttpClient) {}
-  // get usersList() {
-  //   return this.http.get('http://localhost:3000/users');
-  // }
+  usersList!: User;
+  usersListObservable$!: Observable<User>;
+
+  constructor(private userService: UsersService, private http: HttpClient) {}
+
+  ngOnInit() {
+    this.usersListObservable$ = this.userService.usersListObservable$;
+    this.usersListObservable$.subscribe(
+      (resp) =>
+        (this.usersList = this.http.get('  http://localhost:3000/users'))
+    );
+  }
 }

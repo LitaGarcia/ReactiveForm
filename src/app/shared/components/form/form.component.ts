@@ -22,9 +22,6 @@ export class FormComponent {
   countries!: Country[];
   selectedCountry!: Country;
 
-  get usersList() {
-    return this.newUserForm.get('usersList') as FormArray;
-  }
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.countries = json;
@@ -50,5 +47,4 @@ export class FormComponent {
     );
   }
 
-  deleteUser(i: number) {}
 }
