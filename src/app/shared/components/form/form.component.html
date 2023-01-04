@@ -13,29 +13,26 @@
       >The username should have min. 3 characters.</small
     >
 
-    <!-- <h5>Password</h5>
+    <h5>Password</h5>
     <span class="p-input-icon-right">
       <i class="pi pi-key"></i>
-      <input type="text" pInputText />
+      <input type="password" pInputText formControlName="password" />
     </span>
+    <small class="p-error block" *ngIf="validateField('password')"
+      >The password should have min. 6 characters.</small
+    >
 
     <h5>Confirm your password</h5>
-    <div class="field">
-      <span class="p-input-icon-right"
-        ><i class="pi pi-key"></i>
 
-        <input
-          id="confirmPassword"
-          type="confirmPassword"
-          class="ng-invalid ng-dirty"
-          pInputText
-        />
-      </span>
+    <span class="p-input-icon-right"
+      ><i class="pi pi-key"></i>
 
-      <small id="username2-help" class="p-error block"
-        >Password is not the same.</small
-      >
-    </div> -->
+      <input type="password" pInputText formControlName="confirmatedPassword" />
+    </span>
+
+    <small class="p-error block" *ngIf="validateField('confirmatedPassword')"
+      >Password is not the same.</small
+    >
 
     <h5>Email</h5>
     <span class="p-float-label">

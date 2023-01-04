@@ -17,13 +17,22 @@ import { ValidatorsService } from '../../services/validators.service';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent {
-  newUserForm: FormGroup = this.fb.group({
-    user: [, [Validators.required, Validators.minLength(3)]],
-    mail: [, [Validators.required, Validators.email]],
-    subscription: [],
-    country: [],
-    city: [, Validators.pattern(this.vs.cityPattern)],
-  });
+  newUserForm: FormGroup = this.fb.group(
+    {
+      user: [, [Validators.required, Validators.minLength(3)]],
+      password: [, [Validators.required, Validators.minLength(6)]],
+      confirmatedPassword: [, [Validators.required]],
+      mail: [, [Validators.required, Validators.email]],
+      subscription: [],
+      country: [],
+      city: [, Validators.pattern(this.vs.cityPattern)],
+    },
+    {
+      validators: [
+        this.vs.validatePasswords('password', 'confirmatedPassword'),
+      ],
+    }
+  );
 
   countries!: Country[];
   selectedCountry!: Country;
