@@ -1,9 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import json from '../../../countries/countries.json';
-import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormArray,
+  FormControl,
+} from '@angular/forms';
 import User from '../../../classes/user';
 import Country from '../../../interfaces/country';
-import { HttpClient } from '@angular/common/http';
+import { ValidatorsService } from '../../services/validators.service';
 
 @Component({
   selector: 'app-form',
@@ -16,35 +22,28 @@ export class FormComponent {
     mail: [, [Validators.required, Validators.email]],
     subscription: [],
     country: [],
-    city: [],
+    city: [, Validators.pattern(this.vs.cityPattern)],
   });
 
   countries!: Country[];
   selectedCountry!: Country;
 
+  // usersList: User[] = [];
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private vs: ValidatorsService) {
     this.countries = json;
-  }
-
-  createNewUser() {
-    if (this.newUserForm.invalid) {
-      this.newUserForm.markAllAsTouched();
-      return;
-    }
-    //better with a service?
-    // this.http
-    //   .post('http://localhost:3000/users', this.newUserForm.value)
-    //   .subscribe((resp) => console.log(resp));
-
-    this.newUserForm.reset();
   }
 
   validateField(field: string) {
     return (
-      this.newUserForm.controls[field].errors &&
-      this.newUserForm.controls[field].touched
+      this.newUserForm.get(field)?.invalid &&
+      this.newUserForm.get(field)?.touched
     );
   }
 
+  onSubmit() {
+    console.log(this.newUserForm.value);
+
+    this.newUserForm.markAllAsTouched();
+  }
 }

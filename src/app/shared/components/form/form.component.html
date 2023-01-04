@@ -1,5 +1,5 @@
 <div class="flex gap-8 centerText">
-  <form (ngSubmit)="createNewUser()" [formGroup]="newUserForm">
+  <form (ngSubmit)="onSubmit()" [formGroup]="newUserForm">
     <h5>Username</h5>
 
     <span class="p-float-label">
@@ -66,14 +66,59 @@
       <input id="float-input" type="text" pInputText formControlName="city" />
       <label for="float-input">Madrid</label>
     </span>
+    <small
+      id="username2-help"
+      class="p-error block"
+      *ngIf="validateField('city')"
+      >Please write a city.</small
+    >
 
-    <button
-      pButton
-      type="button"
-      label="Send"
-      (click)="createNewUser()"
-    ></button>
+    <button pButton type="submit" label="Send"></button>
   </form>
+  <!-- {{ newUserForm.value }} -->
+  <!-- <p-table [value]="newUserForm.value" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Mail</th>
+        <th>Subscribed</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.user }}</td>
+        <td>{{ user.mail }}</td>
+        <td>
+          <i
+            class="pi pi-check"
+            style="font-size: 1rem"
+            *ngIf="user.subscription"
+          ></i>
+        </td>
+        <td>{{ user.country.name }}</td>
+        <td>{{ user.city }}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-user-edit"
+            class="p-button-rounded p-button-info p-button-outlined"
+          ></button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger p-button-outlined"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 
-  <app-table></app-table>
+  <app-table></app-table> -->
 </div>
