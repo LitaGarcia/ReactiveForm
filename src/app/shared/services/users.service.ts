@@ -7,8 +7,15 @@ import { Subject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersService {
-  private _usersList$: Subject<User> = new Subject();
-  usersListObservable$: Observable<User> = this._usersList$.asObservable();
+ 
 
-  constructor() {}
+
+  constructor( private http: HttpClient) {}
+
+  getUsersList(): Observable<User[]> {
+    return this.http.get<User[]>('http://localhost:3000/users');
+  }
+  sendNewUser(user: User): Observable<User>{
+    return this.http.post<User>('http://localhost:3000/users', user); 
+  }
 }

@@ -10,6 +10,7 @@ import {
 import User from '../../../classes/user';
 import Country from '../../../interfaces/country';
 import { ValidatorsService } from '../../services/validators.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-form',
@@ -19,7 +20,7 @@ import { ValidatorsService } from '../../services/validators.service';
 export class FormComponent {
   newUserForm: FormGroup = this.fb.group(
     {
-      user: [, [Validators.required, Validators.minLength(3)]],
+      username: [, [Validators.required, Validators.minLength(3)]],
       password: [, [Validators.required, Validators.minLength(6)]],
       confirmatedPassword: [, [Validators.required]],
       mail: [, [Validators.required, Validators.email]],
@@ -39,7 +40,11 @@ export class FormComponent {
 
   // usersList: User[] = [];
 
-  constructor(private fb: FormBuilder, private vs: ValidatorsService) {
+  constructor(
+    private fb: FormBuilder,
+    private vs: ValidatorsService,
+    private usersService: UsersService
+  ) {
     this.countries = json;
   }
 
@@ -52,7 +57,7 @@ export class FormComponent {
 
   onSubmit() {
     console.log(this.newUserForm.value);
-
+    this.usersService.sendNewUser(this.newUserForm.value);
     this.newUserForm.markAllAsTouched();
   }
 }
