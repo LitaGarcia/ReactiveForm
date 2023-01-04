@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import User from '../../../classes/user';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -7,9 +9,8 @@ import User from '../../../classes/user';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent {
-  @Input()
-  usersList!: User[];
-  prueba() {
-    console.log('probando');
-  }
+  constructor(private http: HttpClient) {}
+  // get usersList() {
+  //   return this.http.get('http://localhost:3000/users');
+  // }
 }

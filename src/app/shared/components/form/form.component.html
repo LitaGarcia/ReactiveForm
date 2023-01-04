@@ -3,18 +3,13 @@
     <h5>Username</h5>
 
     <span class="p-float-label">
-      <input
-        id="float-input"
-        type="text"
-        pInputText
-        formControlName="username"
-      />
+      <input id="float-input" type="text" pInputText formControlName="user" />
       <label for="float-input">LitaGarcia</label>
     </span>
     <small
       id="username2-help"
       class="p-error block"
-      *ngIf="validateField('username')"
+      *ngIf="validateField('user')"
       >The username should have min. 3 characters.</small
     >
 
@@ -80,5 +75,5 @@
     ></button>
   </form>
 
-  <app-table></app-table>
+  <!-- <app-table></app-table> -->
 </div>

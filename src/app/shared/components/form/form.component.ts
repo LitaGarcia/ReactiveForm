@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import json from '../../../countries/countries.json';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import User from '../../../classes/user';
 import Country from '../../../interfaces/country';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-form',
@@ -11,9 +12,9 @@ import Country from '../../../interfaces/country';
 })
 export class FormComponent {
   newUserForm: FormGroup = this.fb.group({
-    username: [, [Validators.required, Validators.minLength(3)]],
+    user: [, [Validators.required, Validators.minLength(3)]],
     mail: [, [Validators.required, Validators.email]],
-    subscription: [true],
+    subscription: [],
     country: [],
     city: [],
   });
@@ -21,15 +22,25 @@ export class FormComponent {
   countries!: Country[];
   selectedCountry!: Country;
 
-  constructor(private fb: FormBuilder) {
+  get usersList() {
+    return this.newUserForm.get('usersList') as FormArray;
+  }
+
+  constructor(private fb: FormBuilder, private http: HttpClient) {
     this.countries = json;
   }
 
   createNewUser() {
     if (this.newUserForm.invalid) {
+      this.newUserForm.markAllAsTouched();
       return;
     }
-    console.log(this.newUserForm.value);
+    //better with a service?
+    // this.http
+    //   .post('http://localhost:3000/users', this.newUserForm.value)
+    //   .subscribe((resp) => console.log(resp));
+
+    this.newUserForm.reset();
   }
 
   validateField(field: string) {
@@ -38,4 +49,6 @@ export class FormComponent {
       this.newUserForm.controls[field].touched
     );
   }
+
+  deleteUser(i: number) {}
 }
