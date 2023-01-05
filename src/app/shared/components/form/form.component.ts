@@ -11,6 +11,7 @@ import User from '../../../classes/user';
 import Country from '../../../interfaces/country';
 import { ValidatorsService } from '../../services/validators.service';
 import { UsersService } from '../../services/users.service';
+import { EmailValidatorService } from '../../services/email-validator.service';
 
 @Component({
   selector: 'app-form',
@@ -23,10 +24,14 @@ export class FormComponent {
       username: [, [Validators.required, Validators.minLength(3)]],
       password: [, [Validators.required, Validators.minLength(6)]],
       confirmatedPassword: [, [Validators.required]],
-      mail: [, [Validators.required, Validators.email]],
+      email: [
+        ,
+        [Validators.required, Validators.pattern(this.vs.emailPattern)],
+        [this.emailValidator],
+      ],
       subscription: [],
       country: [],
-      city: [, Validators.pattern(this.vs.cityPattern)],
+      city: [],
     },
     {
       validators: [
@@ -38,12 +43,23 @@ export class FormComponent {
   countries!: Country[];
   selectedCountry!: Country;
 
-  // usersList: User[] = [];
+  get emailErrorMsg(): string {
+    const errors = this.newUserForm.get('email')?.errors;
+    if (errors?.['required']) {
+      return 'Email is required';
+    } else if (errors?.['pattern']) {
+      return 'The field should have an email format ';
+    } else if (errors?.['existingEmail']) {
+      return 'The email already exists';
+    }
+    return '';
+  }
 
   constructor(
     private fb: FormBuilder,
     private vs: ValidatorsService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private emailValidator: EmailValidatorService
   ) {
     this.countries = json;
   }
@@ -55,9 +71,12 @@ export class FormComponent {
     );
   }
 
+
+
   onSubmit() {
     console.log(this.newUserForm.value);
-    this.usersService.sendNewUser(this.newUserForm.value);
+    //why?
+    // this.usersService.sendNewUser(this.newUserForm.value);
     this.newUserForm.markAllAsTouched();
   }
 }

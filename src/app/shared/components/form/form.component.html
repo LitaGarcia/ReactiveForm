@@ -3,13 +3,18 @@
     <h5>Username</h5>
 
     <span class="p-float-label">
-      <input id="float-input" type="text" pInputText formControlName="user" />
+      <input
+        id="float-input"
+        type="text"
+        pInputText
+        formControlName="username"
+      />
       <label for="float-input">LitaGarcia</label>
     </span>
     <small
       id="username2-help"
       class="p-error block"
-      *ngIf="validateField('user')"
+      *ngIf="validateField('username')"
       >The username should have min. 3 characters.</small
     >
 
@@ -36,14 +41,14 @@
 
     <h5>Email</h5>
     <span class="p-float-label">
-      <input pInputText id="float-input" type="text" formControlName="mail" />
+      <input pInputText id="float-input" type="text" formControlName="email" />
       <label for="float-input">litagarcia@mail.com</label>
     </span>
     <small
       id="username2-help"
       class="p-error block"
-      *ngIf="validateField('mail')"
-      >You need to write an email.</small
+      *ngIf="validateField('email')"
+      >{{ emailErrorMsg }}.</small
     >
 
     <br />
@@ -63,15 +68,14 @@
       <input id="float-input" type="text" pInputText formControlName="city" />
       <label for="float-input">Madrid</label>
     </span>
-    <small
-      id="username2-help"
-      class="p-error block"
-      *ngIf="validateField('city')"
-      >Please write a city.</small
-    >
 
-    <button pButton type="submit" label="Send"></button>
+    <button
+      pButton
+      type="submit"
+      label="Send"
+      [disabled]="newUserForm.pending"
+    ></button>
   </form>
 
-  <app-table></app-table> 
+  <app-table></app-table>
 </div>
