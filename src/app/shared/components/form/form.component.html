@@ -84,10 +84,9 @@
     <button
       pButton
       type="submit"
-      label="Send"
+      label="{{ userToUpdate ? 'Update' : 'Send' }}"
       [disabled]="newUserForm.pending"
     ></button>
   </form>
-  <h2>{{ userToUpdate }}</h2>
   <app-table (onUserToUpdate)="getUserToUpdate($event)"></app-table>
 </div>

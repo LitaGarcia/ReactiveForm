@@ -27,7 +27,7 @@ export class FormComponent {
   newUserForm: FormGroup = this.fb.group(
     {
       username: [
-        ,
+        //how to make a conditional as a first value ,
         [Validators.required, Validators.minLength(3)],
         // this.usernameValidator,
       ],
@@ -55,8 +55,7 @@ export class FormComponent {
     }
   );
 
-  //swtich objectliteral?
-  //service emailErrorMsg
+  //TODO: Component Wrapper
   get emailErrorMsg(): string {
     const errors = this.newUserForm.get('email')?.errors;
     if (errors?.['required']) {
@@ -93,13 +92,14 @@ export class FormComponent {
         .addNewUser(this.newUserForm.value)
         .subscribe((resp) => console.log(resp));
     }
-
+    if (this.userToUpdate) {
+      //TODO: Http update user
+      //
+    }
     this.newUserForm.markAllAsTouched();
   }
 
   getUserToUpdate(e: User) {
-    console.log(e);
-
     this.userToUpdate = e;
   }
 }
