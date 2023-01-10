@@ -7,15 +7,18 @@ import { Subject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersService {
- 
-
-
-  constructor( private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getUsersList(): Observable<User[]> {
     return this.http.get<User[]>('http://localhost:3000/users');
   }
-  sendNewUser(user: User): Observable<User>{
-    return this.http.post<User>('http://localhost:3000/users', user); 
+  addNewUser(user: User): Observable<User> {
+    return this.http.post<User>('http://localhost:3000/users', user);
+  }
+  deleteUser(id: number): Observable<User> {
+    return this.http.delete<User>(`http://localhost:3000/users/${id}`);
+  }
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>('http://localhost:3000/users', user);
   }
 }

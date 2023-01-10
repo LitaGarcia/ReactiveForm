@@ -10,6 +10,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-user>
+    <h1>{{ user | json }}</h1>
     <tr>
       <td>{{ user.username }}</td>
       <td>{{ user.email }}</td>
@@ -29,6 +30,7 @@
           type="button"
           icon="pi pi-user-edit"
           class="p-button-rounded p-button-info p-button-outlined"
+          (click)="setUser(user.id)"
         ></button>
         <button
           pButton
@@ -36,6 +38,7 @@
           type="button"
           icon="pi pi-trash"
           class="p-button-rounded p-button-danger p-button-outlined"
+          (click)="deleteUser(user.id)"
         ></button>
       </td>
     </tr>

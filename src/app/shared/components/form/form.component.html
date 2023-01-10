@@ -17,7 +17,7 @@
       *ngIf="validateField('username')"
       >The username should have min. 3 characters.</small
     >
-    
+
     <!-- <small
       id="username2-help"
       class="p-error block"
@@ -88,6 +88,6 @@
       [disabled]="newUserForm.pending"
     ></button>
   </form>
-
-  <app-table></app-table>
+  <h2>{{ userToUpdate }}</h2>
+  <app-table (onUserToUpdate)="getUserToUpdate($event)"></app-table>
 </div>

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import json from '../../../countries/countries.json';
 import {
   FormGroup,
@@ -20,6 +20,10 @@ import { UsernameValidatorService } from '../../services/username-validator.serv
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent {
+  countries!: Country[];
+  selectedCountry!: Country;
+  userToUpdate!: User;
+
   newUserForm: FormGroup = this.fb.group(
     {
       username: [
@@ -50,9 +54,6 @@ export class FormComponent {
       ],
     }
   );
-
-  countries!: Country[];
-  selectedCountry!: Country;
 
   //swtich objectliteral?
   //service emailErrorMsg
@@ -89,10 +90,16 @@ export class FormComponent {
     console.log(this.newUserForm.value);
     if (this.newUserForm.valid) {
       this.usersService
-        .sendNewUser(this.newUserForm.value)
+        .addNewUser(this.newUserForm.value)
         .subscribe((resp) => console.log(resp));
     }
 
     this.newUserForm.markAllAsTouched();
+  }
+
+  getUserToUpdate(e: User) {
+    console.log(e);
+
+    this.userToUpdate = e;
   }
 }

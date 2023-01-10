@@ -6,6 +6,7 @@ export default class User {
     public mail: string,
     public country: Country,
     public subscription: boolean,
-    public city: string
+    public city: string,
+    public id: number
   ) {}
 }

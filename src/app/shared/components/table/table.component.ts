@@ -1,7 +1,5 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import User from '../../../classes/user';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { UsersService } from '../../services/users.service';
 @Component({
   selector: 'app-table',
@@ -10,6 +8,7 @@ import { UsersService } from '../../services/users.service';
 })
 export class TableComponent {
   usersList: User[] = [];
+  @Output() onUserToUpdate: EventEmitter<User> = new EventEmitter<User>();
 
   constructor(private usersService: UsersService) {}
 
@@ -17,5 +16,19 @@ export class TableComponent {
     this.usersService.getUsersList().subscribe((resp: User[]) => {
       this.usersList! = resp;
     });
+  }
+
+  deleteUser(id: number) {
+    this.usersService.deleteUser(id).subscribe();
+  }
+
+  setUser(user: User) {
+    const retrievedUser = this.usersList.find((u) => {
+      console.log(u);
+      u.id === user.id;
+    });
+    console.log(retrievedUser);
+
+    this.onUserToUpdate.emit(retrievedUser);
   }
 }
