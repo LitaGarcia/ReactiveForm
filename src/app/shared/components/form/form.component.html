@@ -17,6 +17,13 @@
       *ngIf="validateField('username')"
       >The username should have min. 3 characters.</small
     >
+    
+    <!-- <small
+      id="username2-help"
+      class="p-error block"
+      *ngIf="this.newUserForm.get('username')?.errors?.['existingUsername']"
+      >Sorry! The username already exists.</small
+    > -->
 
     <h5>Password</h5>
     <span class="p-input-icon-right">
@@ -61,7 +68,12 @@
     ></p-checkbox>
 
     <h5>Country</h5>
-    <p-dropdown [options]="countries" optionLabel="name"> </p-dropdown>
+    <p-dropdown
+      [options]="countries"
+      optionLabel="name"
+      formControlName="country"
+    >
+    </p-dropdown>
 
     <h5>City</h5>
     <span class="p-float-label">

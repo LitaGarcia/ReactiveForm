@@ -11,8 +11,8 @@
   </ng-template>
   <ng-template pTemplate="body" let-user>
     <tr>
-      <td>{{ user.user }}</td>
-      <td>{{ user.mail }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
       <td>
         <i
           class="pi pi-check"
@@ -20,7 +20,7 @@
           *ngIf="user.subscription"
         ></i>
       </td>
-      <td>{{ user.country }}</td>
+      <td>{{ user.country.name }}</td>
       <td>{{ user.city }}</td>
       <td>
         <button
