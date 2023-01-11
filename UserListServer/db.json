@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "username": "LitaGarcia",
+      "password": "123456",
+      "confirmatedPassword": "123456",
+      "email": "litagarcia@gmail.com",
+      "subscription": true,
+      "country": {
+        "name": "Spain",
+        "code": "ES"
+      },
+      "city": "Seville",
+      "id": 2
+    }
+  ]
+}
