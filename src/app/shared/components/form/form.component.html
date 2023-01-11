@@ -9,7 +9,9 @@
         pInputText
         formControlName="username"
       />
-      <label for="float-input">LitaGarcia</label>
+      <label for="float-input" *ngIf="userToUpdate">
+        {{ userToUpdate.username }}
+      </label>
     </span>
     <small
       id="username2-help"
@@ -17,7 +19,6 @@
       *ngIf="validateField('username')"
       >The username should have min. 3 characters.</small
     >
-
     <!-- <small
       id="username2-help"
       class="p-error block"
@@ -49,7 +50,9 @@
     <h5>Email</h5>
     <span class="p-float-label">
       <input pInputText id="float-input" type="text" formControlName="email" />
-      <label for="float-input">litagarcia@mail.com</label>
+      <label for="float-input" *ngIf="userToUpdate">{{
+        userToUpdate.email
+      }}</label>
     </span>
     <small
       id="username2-help"
@@ -78,14 +81,15 @@
     <h5>City</h5>
     <span class="p-float-label">
       <input id="float-input" type="text" pInputText formControlName="city" />
-      <label for="float-input">Madrid</label>
+      <label for="float-input" *ngIf="userToUpdate">{{
+        userToUpdate.city
+      }}</label>
     </span>
 
     <button
       pButton
       type="submit"
       label="{{ userToUpdate ? 'Update' : 'Send' }}"
-      [disabled]="newUserForm.pending"
     ></button>
   </form>
   <app-table (onUserToUpdate)="getUserToUpdate($event)"></app-table>

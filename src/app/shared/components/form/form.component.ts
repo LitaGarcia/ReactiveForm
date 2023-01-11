@@ -13,6 +13,7 @@ import { ValidatorsService } from '../../services/validators.service';
 import { UsersService } from '../../services/users.service';
 import { EmailValidatorService } from '../../services/email-validator.service';
 import { UsernameValidatorService } from '../../services/username-validator.service';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-form',
@@ -27,6 +28,7 @@ export class FormComponent {
   newUserForm: FormGroup = this.fb.group(
     {
       username: [
+        ,
         //how to make a conditional as a first value ,
         [Validators.required, Validators.minLength(3)],
         // this.usernameValidator,
@@ -39,10 +41,10 @@ export class FormComponent {
           Validators.required,
           Validators.pattern(this.validatorsService.emailPattern),
         ],
-        [this.emailValidator],
+        // [this.emailValidator],
       ],
       subscription: [],
-      country: [],
+      country: [{ name: 'Spain', code: 'ES' }],
       city: [],
     },
     {
@@ -54,6 +56,8 @@ export class FormComponent {
       ],
     }
   );
+
+  ngOnInit() {}
 
   //TODO: Component Wrapper
   get emailErrorMsg(): string {
@@ -86,20 +90,33 @@ export class FormComponent {
   }
 
   onSubmit() {
-    console.log(this.newUserForm.value);
-    if (this.newUserForm.valid) {
+    if (this.newUserForm.valid && !this.userToUpdate) {
       this.usersService
         .addNewUser(this.newUserForm.value)
         .subscribe((resp) => console.log(resp));
     }
-    if (this.userToUpdate) {
-      //TODO: Http update user
-      //
+    if (this.userToUpdate && this.newUserForm.valid) {
+      this.usersService
+        .updateUser(this.newUserForm.value, this.userToUpdate.id)
+        .subscribe((resp) => console.log('done'));
+    } else {
+      console.log('pepe');
     }
-    this.newUserForm.markAllAsTouched();
+
+    this.newUserForm.reset();
   }
 
   getUserToUpdate(e: User) {
     this.userToUpdate = e;
+    this.newUserForm.setValue({
+      username: this.userToUpdate.username,
+      password: this.userToUpdate.password,
+      confirmatedPassword: this.userToUpdate.confirmatedPassword,
+      email: this.userToUpdate.email,
+      subscription: this.userToUpdate.subscription,
+      country: this.userToUpdate.country,
+      city: this.userToUpdate.city,
+      // id: this.userToUpdate.id,
+    });
   }
 }

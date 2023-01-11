@@ -1,4 +1,4 @@
-import { IfStmt } from '@angular/compiler';
+
 import { Component, EventEmitter, Output } from '@angular/core';
 import User from '../../../classes/user';
 import { UsersService } from '../../services/users.service';
@@ -25,7 +25,6 @@ export class TableComponent {
 
   setUser(user: User) {
     const retrievedUser = this.usersList.find((u) => u.id === user.id);
-    console.log(retrievedUser);
 
     this.onUserToUpdate.emit(retrievedUser);
   }
