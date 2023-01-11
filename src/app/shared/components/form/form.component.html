@@ -1,96 +1,104 @@
-<div class="flex gap-8 centerText">
-  <form (ngSubmit)="onSubmit()" [formGroup]="newUserForm">
-    <h5>Username</h5>
+<div class="grid">
+  <div class="col m-2">
+    <form (ngSubmit)="onSubmit()" [formGroup]="newUserForm">
+      <h5>Username</h5>
 
-    <span class="p-float-label">
-      <input
-        id="float-input"
-        type="text"
-        pInputText
-        formControlName="username"
-      />
-      <label for="float-input">
-        {{ "e.g: LitaGarcia" || userToUpdate.username }}
-      </label>
-    </span>
-    <small
-      id="username2-help"
-      class="p-error block"
-      *ngIf="validateField('username')"
-      >The username should have min. 3 characters.</small
-    >
-    <!-- <small
-      id="username2-help"
-      class="p-error block"
-      *ngIf="this.newUserForm.get('username')?.errors?.['existingUsername']"
-      >Sorry! The username already exists.</small
-    > -->
+      <span class="p-float-label">
+        <input
+          id="float-input"
+          type="text"
+          pInputText
+          formControlName="username"
+        />
+        <label for="float-input">
+          {{ "e.g: LitaGarcia" || userToUpdate.username }}
+        </label>
+      </span>
+      <small
+        id="username2-help"
+        class="p-error block"
+        *ngIf="validateField('username')"
+        >The username should have min. 3 characters.</small
+      >
 
-    <h5>Password</h5>
-    <span class="p-input-icon-right">
-      <i class="pi pi-key"></i>
-      <input type="password" pInputText formControlName="password" />
-    </span>
-    <small class="p-error block" *ngIf="validateField('password')"
-      >The password should have min. 6 characters.</small
-    >
+      <h5>Password</h5>
+      <span class="p-input-icon-right">
+        <i class="pi pi-key"></i>
+        <input type="password" pInputText formControlName="password" />
+      </span>
+      <small class="p-error block" *ngIf="validateField('password')"
+        >The password should have min. 6 characters.</small
+      >
 
-    <h5>Confirm your password</h5>
+      <h5>Confirm your password</h5>
 
-    <span class="p-input-icon-right"
-      ><i class="pi pi-key"></i>
+      <span class="p-input-icon-right"
+        ><i class="pi pi-key"></i>
 
-      <input type="password" pInputText formControlName="confirmatedPassword" />
-    </span>
+        <input
+          type="password"
+          pInputText
+          formControlName="confirmatedPassword"
+        />
+      </span>
 
-    <small class="p-error block" *ngIf="validateField('confirmatedPassword')"
-      >Password is not the same.</small
-    >
+      <small class="p-error block" *ngIf="validateField('confirmatedPassword')"
+        >Password is not the same.</small
+      >
 
-    <h5>Email</h5>
-    <span class="p-float-label">
-      <input pInputText id="float-input" type="text" formControlName="email" />
-      <label for="float-input">{{
-        "e.g: lt@gmail.com" || userToUpdate.email
-      }}</label>
-    </span>
-    <small
-      id="username2-help"
-      class="p-error block"
-      *ngIf="validateField('email')"
-      >{{ emailErrorMsg }}.</small
-    >
+      <h5>Email</h5>
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="float-input"
+          type="text"
+          formControlName="email"
+        />
+        <label for="float-input">{{
+          "e.g: lt@gmail.com" || userToUpdate.email
+        }}</label>
+      </span>
+      <small
+        id="username2-help"
+        class="p-error block"
+        *ngIf="validateField('email')"
+        >{{ emailErrorMsg }}.</small
+      >
 
-    <br />
+      <br />
 
-    <p-checkbox
-      name="subscription"
-      [binary]="true"
-      label="Send me promotional offers"
-      formControlName="subscription"
-    ></p-checkbox>
+      <p-checkbox
+        name="subscription"
+        [binary]="true"
+        label="Send me promotional offers"
+        formControlName="subscription"
+      ></p-checkbox>
 
-    <h5>Country</h5>
-    <p-dropdown
-      [options]="countries"
-      optionLabel="name"
-      formControlName="country"
-    >
-    </p-dropdown>
+      <h5>Country</h5>
+      <p-dropdown
+        [options]="countries"
+        optionLabel="name"
+        formControlName="country"
+      >
+      </p-dropdown>
 
-    <h5>City</h5>
-    <span class="p-float-label">
-      <input id="float-input" type="text" pInputText formControlName="city" />
-      <label for="float-input">{{
-        "e.g: Madrid" || userToUpdate.city 
-      }}</label>
-    </span>
+      <h5>City</h5>
+      <span class="p-float-label">
+        <input id="float-input" type="text" pInputText formControlName="city" />
+        <label for="float-input">{{
+          "e.g: Madrid" || userToUpdate.city
+        }}</label>
+      </span>
 
-    <button
-      pButton
-      type="submit"
-      label="{{ userToUpdate ? 'Update' : 'Send' }}"
-    ></button>
-  </form>
-  <app-table (onUserToUpdate)="getUserToUpdate($event)"></app-table>
+      <button
+        pButton
+        type="submit"
+        label="{{ userToUpdate ? 'Update' : 'Send' }}"
+      ></button>
+    </form>
+  </div>
+
+  <div class="col m-2">
+    <app-table (onUserToUpdate)="getUserToUpdate($event)"></app-table>
+  </div>
 </div>

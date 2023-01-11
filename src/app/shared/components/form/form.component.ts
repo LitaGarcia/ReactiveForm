@@ -29,9 +29,8 @@ export class FormComponent {
     {
       username: [
         ,
-        //how to make a conditional as a first value ,
         [Validators.required, Validators.minLength(3)],
-        // this.usernameValidator,
+
       ],
       password: [, [Validators.required, Validators.minLength(6)]],
       confirmatedPassword: [, [Validators.required]],
@@ -77,8 +76,8 @@ export class FormComponent {
     private fb: FormBuilder,
     private validatorsService: ValidatorsService,
     private usersService: UsersService,
-    private emailValidator: EmailValidatorService,
-    private usernameValidator: UsernameValidatorService
+    // private emailValidator: EmailValidatorService,
+
   ) {
     this.countries = json;
   }
