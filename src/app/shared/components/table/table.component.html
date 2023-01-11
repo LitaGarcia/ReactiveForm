@@ -11,7 +11,7 @@
   </ng-template>
   <ng-template pTemplate="body" let-user>
     <tr>
-      <td>{{ user.username }}</td>
+      <td>{{ user.username | titlecase }}</td>
       <td>{{ user.email }}</td>
       <td>
         <i
@@ -21,7 +21,7 @@
         ></i>
       </td>
       <td>{{ user.country.name }}</td>
-      <td>{{ user.city }}</td>
+      <td>{{ user.city | titlecase }}</td>
       <td>
         <button
           pButton

@@ -9,8 +9,8 @@
         pInputText
         formControlName="username"
       />
-      <label for="float-input" *ngIf="userToUpdate">
-        {{ userToUpdate.username }}
+      <label for="float-input">
+        {{ "e.g: LitaGarcia" || userToUpdate.username }}
       </label>
     </span>
     <small
@@ -50,8 +50,8 @@
     <h5>Email</h5>
     <span class="p-float-label">
       <input pInputText id="float-input" type="text" formControlName="email" />
-      <label for="float-input" *ngIf="userToUpdate">{{
-        userToUpdate.email
+      <label for="float-input">{{
+        "e.g: lt@gmail.com" || userToUpdate.email
       }}</label>
     </span>
     <small
@@ -81,8 +81,8 @@
     <h5>City</h5>
     <span class="p-float-label">
       <input id="float-input" type="text" pInputText formControlName="city" />
-      <label for="float-input" *ngIf="userToUpdate">{{
-        userToUpdate.city
+      <label for="float-input">{{
+        "e.g: Madrid" || userToUpdate.city 
       }}</label>
     </span>
 

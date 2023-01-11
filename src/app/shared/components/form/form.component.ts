@@ -91,18 +91,15 @@ export class FormComponent {
 
   onSubmit() {
     if (this.newUserForm.valid && !this.userToUpdate) {
-      this.usersService
-        .addNewUser(this.newUserForm.value)
-        .subscribe((resp) => console.log(resp));
+      this.usersService.addNewUser(this.newUserForm.value).subscribe();
     }
     if (this.userToUpdate && this.newUserForm.valid) {
       this.usersService
         .updateUser(this.newUserForm.value, this.userToUpdate.id)
-        .subscribe((resp) => console.log('done'));
-    } else {
-      console.log('pepe');
+        .subscribe();
+        this.userToUpdate.email
     }
-
+    
     this.newUserForm.reset();
   }
 
