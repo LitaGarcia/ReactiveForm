@@ -1,7 +1,8 @@
-
 import { Component, EventEmitter, Output } from '@angular/core';
 import User from '../../../classes/user';
 import { UsersService } from '../../services/users.service';
+import { Subject } from 'rxjs';
+import { ForwardRefHandling } from '@angular/compiler';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -13,10 +14,19 @@ export class TableComponent {
 
   constructor(private usersService: UsersService) {}
 
+  private _refhesh: Subject<void> = new Subject<void>();
+  get refresh() {
+    return this._refhesh;
+  }
   ngOnInit() {
     this.usersService.getUsersList().subscribe((resp: User[]) => {
       this.usersList! = resp;
     });
+    this.usersService.RefreshRequired.subscribe((r) =>
+      this.usersService.getUsersList().subscribe((resp: User[]) => {
+        this.usersList! = resp;
+      })
+    );
   }
 
   deleteUser(id: number) {
